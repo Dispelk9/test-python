@@ -1,5 +1,5 @@
 #===========================================================
-#       M A I L S           S T A T I S T I C S
+#       P Y T H O N S          H A N D B O O K
 #===========================================================
 
 # # how to input string
@@ -67,13 +67,15 @@
 #                 outfile.write('\n')
 
 
+# # L O O P 
+
 # # calculate PT b2
 # import math
 
 # loo = input("Input loop: \n")
 
 
-# for x in range(int(loo)):                           #for loop syntax
+# for x in range(int(loo)):                           #For Python syntax
 #     a = int(input("Input a: \n"))                   #convert string to int
 #     b = int(input("Input b: \n"))
 #     c = int(input("Input c: \n"))
@@ -100,8 +102,71 @@
 #     age = age + 1                                     # instead age++ we need this
 
 
+# name = ''                                               # While Python syntax
+# while name != 'your name':
+#     print('Please type your name.')
+#     name = input()
+#     if name = 'your name'
+#         break                                           # break Python
+# print('Thank you!')
+
+# while True:
+#     print('Who are you?')
+#     name = input()
+#     if name != 'Joe':
+#      continue                                             # Continue if true, if not then the latter can not be processed.
+#     print('Hello, Joe. What is the password? (It is a fish.)')
+#     password = input()
+#     if password == 'swordfish':
+#      break
+# print('Access granted.')
+
+# # note: continue and break only in while and for
+
+
+# # F U N C T I O N
+# import random
+# def getAnswer(answerNumber):                               # def is used to define a function  
+#     if answerNumber == 1:
+#         return 'It is certain'
+#     elif answerNumber == 2:
+#         return 'It is decidedly so'
+#     elif answerNumber == 3:
+#         return 'Yes'
+#     elif answerNumber == 4:
+#         return 'Reply hazy try again'
+#     elif answerNumber == 5:
+#         return 'Ask again later'
+#     elif answerNumber == 6:
+#         return 'Concentrate and ask again'
+#     elif answerNumber == 7:
+#         return 'My reply is no'
+#     elif answerNumber == 8:
+#         return 'Outlook not so good'
+#     elif answerNumber == 9:
+#         return 'Very doubtful'
+# r = random.randint(1, 9)
+# fortune = getAnswer(r)
+# print(fortune)
+
+# def spam(divideBy):
+#     try:                                             # Try clause runs the code, if it gets error, go to except clause
+#         return 42 / divideBy
+#     except ZeroDivisionError:
+#         print('Error: Invalid argument.')
+# print(spam(2))
+# print(spam(12))
+# print(spam(0))
+# print(spam(1))
+
+
+# L I S T
+spam = ['cat', 'bat', 'rat', 'elephant']
+print(spam[-1]) 	                                 # get the variable at the end of the list
+print(spam[0])                                          
+
+
 
 
 print("Press Enter to exit")                         # stop the terminal to close after running the program
 input()
-
