@@ -81,22 +81,23 @@
 #     e = (-b - (math.sqrt(b**2 - 4*a*c)))/(2*a)      
 #     print("the result is %s and %s" % (d,e))        # print multiple variables
 
-print('What is your age?')                            # ask for their age
-myAge = input()
-# print only with string variable, have to convert them into string
-print('You will be ' + str(int(myAge) + 1) + ' in a year.')    
+# print('What is your age?')                            # ask for their age
+# myAge = input()
+# # print only with string variable, have to convert them into string
+# print('You will be ' + str(int(myAge) + 1) + ' in a year.')    
 
-#if elseif
-name = None                                           # Assign a none variable   
-age  = None
-if name == 'Alice':
-    print('Hi, Alice.')
-elif age < 12:
-    print('You are not Alice, kiddo.')
-elif age > 2000:
-    print('Unlike you, Alice is not an undead, immortal vampire.')
-elif age > 100:
-    print('You are not Alice, grannie.')
+# #if elseif
+# name = None                                           # Assign a none variable   
+# age  = None
+# if name == 'Alice':
+#     print('Hi, Alice.')
+# elif age < 12:
+#     print('You are not Alice, kiddo.')
+# elif age > 2000:
+#     print('Unlike you, Alice is not an undead, immortal vampire.')
+# elif age > 100:
+#     print('You are not Alice, grannie.')
+#     age = age + 1                                     # instead age++ we need this
 
 
 
