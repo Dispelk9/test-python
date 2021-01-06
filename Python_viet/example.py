@@ -160,13 +160,63 @@
 # print(spam(1))
 
 
-# L I S T
-spam = ['cat', 'bat', 'rat', 'elephant']
-print(spam[-1]) 	                                 # get the variable at the end of the list
-print(spam[0])                                          
+# # L I S T
+# spam = ['cat', 'bat', 'rat', 'elephant']
+# print(spam[-1]) 	                                 # get the variable at the end of the list
+# print(spam[0])                                          
+# print(spam[1:3])                                     # S L I C E 
 
 
+# # Augmented Assignments
+# spam = spam + 1 # spam += 1
+# spam = spam - 1 # spam -= 1
+# spam = spam * 1 # spam *= 1
+# spam = spam / 1 # spam /= 1
+# spam = spam % 1 # spam %= 1
 
+# # D I C T I O N A R Y
+# myCat = {'size': 'fat', 'color': 'gray', 'disposition': 'loud'}             # size, color, dispostition are data types
+
+# # dictionary can be used like this
+# birthdays = {'A':'11-10','B':'15-12','C':'28-02','D':'19-11','E':'18-05'}
+
+# print(birthdays.keys())                                                       # keys() get all information A,B,C,D,E   
+# print(birthdays.values())                                                     # values() get all the birthdays           
+# print(birthdays.get('A',0))                                                   # get to extract the informations
+
+# while True:
+#     print('Enter a name: (blank to quit)')
+#     name = input()
+#     if name == '':
+#         break
+#     if name in birthdays:
+#         print(birthdays[name] + ' is the birthday of ' + name)
+#     else:
+#         print(' I don\'t have the birthday of ' + name)
+#         print(' Please input the birthday date: ')
+#         newbd = input()
+#         birthdays[name] = newbd 
+#         print('birthday updated!')
+#         print('Continue?')
+#         lc = input()
+#         if lc == 'y':
+#             continue
+#         elif lc == 'n':
+#             break
+#         else:
+#             print('Wrong Input')
+
+
+import copy 
+
+spam = ['A','B','C','D']
+cheese = copy.copy(spam)                             # copy using copy library
+cheese[1] = 42                                       # add 42 into space 1 of cheese, list start with 0 so 1 is B
+print(spam)
+print(cheese)
+spam[:2]
 
 print("Press Enter to exit")                         # stop the terminal to close after running the program
 input()
+
+# keys() values() items()
