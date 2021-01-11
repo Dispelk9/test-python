@@ -207,16 +207,40 @@
 #             print('Wrong Input')
 
 
-import copy 
+# import copy 
 
-spam = ['A','B','C','D']
-cheese = copy.copy(spam)                             # copy using copy library
-cheese[1] = 42                                       # add 42 into space 1 of cheese, list start with 0 so 1 is B
-print(spam)
-print(cheese)
-spam[:2]
+# spam = ['A','B','C','D']
+# cheese = copy.copy(spam)                             # copy using copy library
+# cheese[1] = 42                                       # add 42 into space 1 of cheese, list start with 0 so 1 is B
+# print(spam)
+# print(cheese)
+# spam[:2]
 
-print("Press Enter to exit")                         # stop the terminal to close after running the program
-input()
+# print("Press Enter to exit")                         # stop the terminal to close after running the program
+# input()
 
 # keys() values() items()
+
+
+import re
+# import netaddr
+import datetime
+
+# regex is Regular Expression
+# used to create a sequence of characters that defines a search pattern
+
+pattern = '^a...s$' # The above code defines a RegEx pattern. The pattern is: any five letter string starting with a and ending with s
+test_string = 'abyss'       # match
+test_string2 = 'Abyss'      # not match
+test_string3 = 'Am asdasd'  # not match
+result = re.match(pattern, test_string)
+
+if result:
+  print("Search successful.")
+else:
+  print("Search unsuccessful.")	
+
+fqdn_regex = re.compile("^(?:[a-z0-9](?:[a-z0-9-_]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-_]*[a-z0-9])?$", flags=re.I)
+mailaddress_regex = re.compile("^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-_]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-_]*[a-z0-9])?$", flags=re.I)
+print(fqdn_regex)
+print(mailaddress_regex)
