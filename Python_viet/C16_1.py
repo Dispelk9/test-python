@@ -5,7 +5,7 @@ import smtplib
 import imapclient
 import pprint
 import sys
-import pyzmail
+# import pyzmail
 
 def mailing_smtp():
     smtpObj = smtplib.SMTP('smtp.gmail.com',587)
@@ -50,8 +50,8 @@ def recv_imap():
     print(UID)
     raw_mess = imapObj.fetch([UID],['BODY[]','FLAGS'])
     print(raw_mess)
-    mess = pyzmail.PyzMessage.factory(raw_mess[UID]['BODY[]'])
-    print(mess + ' ' + mess.get_subject() + ' ' + mess.get_addresses('from') + ' ' + mess.get_addresses('to'))
+    # mess = pyzmail.PyzMessage.factory(raw_mess[UID]['BODY[]'])
+    # print(mess + ' ' + mess.get_subject() + ' ' + mess.get_addresses('from') + ' ' + mess.get_addresses('to'))
     s = imapObj.logout()
     print(s)
     
