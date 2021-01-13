@@ -40,12 +40,26 @@ def mailing_smtp(addr):
     s = smtpObj.quit()
     print(s)
 
+
+# TODO soup.select not working
+
 def search_gg(input):
     print('Googling...')
     res = requests.get('https://google.com/search?q=' + ' '.join(input))
     print(res)
     res.raise_for_status()
-    print(res)
+    print(res.text)
+    soup = bs4.BeautifulSoup(res.text,features="html.parser")
+    linkElems = soup.select('.r a')
+    print(linkElems)
+    numOpen = min(5,len(linkElems))
+    print(numOpen)
+    for i in range(numOpen):
+        webbrowser.open('http://google.com' + linkElems[i].get('href'))
+
+
+def download_comic():
+    print('Comic from XKCD')
 
 
 if __name__ == '__main__':
@@ -55,6 +69,7 @@ if __name__ == '__main__':
         parser = argparse.ArgumentParser(description='Process some integers.')
         parser.add_argument('--maps', type=str, nargs='+',help='search and open locations')
         parser.add_argument('--search', type=str,nargs='+', help='')
+        parser.add_argument('--comic',type=str,nargs='+',help='download new comics')
         args = parser.parse_args()
     except IOError:
         print('IO Error')
@@ -70,5 +85,7 @@ if __name__ == '__main__':
         mailing_smtp(s)
     if args.search != None:
         search_gg(args.search)
+    if args.comic == None:
+        download_comic()
 
     print('Program completed')
