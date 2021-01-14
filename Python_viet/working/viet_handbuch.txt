@@ -1,18 +1,19 @@
+Handbook cua viet voi PAG/APPMAIL/DNS
+
+1.Keyword new Domain
 neue Domain porsche-cloud.com
-
 need beschreibung
-
 check porsche-paris.fr for references.
 
-
+------------------------------------------------
+2.Keyword Firewall
 Firewall freischaltung
 Description
 Für eine neue AppMail Freischaltung auf dem third party Mailer. 
 Sollen neue Hosts in die Gruppe der Bulkmail Clients aufgenommen werden.
 
 ------------------------------------------------
-
-
+3.Keyword APPMAIL external, internal
 external: true
 along with
 internal_domains: true
@@ -24,7 +25,7 @@ For any internal + external recipients, internal_domains: must be false
 
 
 ------------------------------------------------
-
+4.Keyword Weiterleitung
 Weiterleitung chi duoc 1 lan trong ~/mail-hq/vars/roles/common/vars/addresses.d>
 
 commit 0d4d87aae118f93bc19452c7304443732f1b29fb
@@ -35,7 +36,7 @@ Date:   Wed Jan 6 09:02:04 2021 +0100
 	
 	
 --------------------------------------------------
-
+5.Keyword umleiten generic
 yeu cau xoa domains A,B va umleiten den mot domain X nao do
 
 check xem co redirect cho domain X nao k. 
@@ -45,16 +46,13 @@ tim file yaml co umleiten cho domain X, them A,B
 
 20210111020019 
 
-
 ---------------------------------------------------
-
+6.Keyword SPF
 @ 3600 IN TXT "v=spf1 -all" <--- das heißt, 
 dass von keinem Mailserver aus Mails verschickt werden. Sie haben aber ja einen MX
 
-
-
-----------------------------------------------------
-
+---------------------------------------------------
+7.Keyword: TLS
 TLS, check ASP hoac k. phu thuoc vao certcheck -v va -va. 
 Neu no kp tu cong ty do, dung outlook cha han thi la ASP.
 
@@ -73,7 +71,7 @@ neu co INC ve SMTL_TLS Consistancy CRIT, thi la do chua add new domain vao Z1
 vi du : INC000010349641
 
 ------------------------------------------------------
-
+8.Keyword porsche.biz   IP ermitteln
 dig ip voi cac hostname phai check xem no duoi gi. 
 
 emea.porsche.biz thi phai dig o server appmail vi du dezulmlgml003.emea.porsche.biz
