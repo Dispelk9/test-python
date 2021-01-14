@@ -1,0 +1,92 @@
+neue Domain porsche-cloud.com
+
+need beschreibung
+
+check porsche-paris.fr for references.
+
+
+Firewall freischaltung
+Description
+Für eine neue AppMail Freischaltung auf dem third party Mailer. 
+Sollen neue Hosts in die Gruppe der Bulkmail Clients aufgenommen werden.
+
+------------------------------------------------
+
+
+external: true
+along with
+internal_domains: true
+leads to the fact that only the internal domains can be written to.
+
+internal_domains: true only if there are also entries in to: for external domains. 
+
+For any internal + external recipients, internal_domains: must be false
+
+
+------------------------------------------------
+
+Weiterleitung chi duoc 1 lan trong ~/mail-hq/vars/roles/common/vars/addresses.d>
+
+commit 0d4d87aae118f93bc19452c7304443732f1b29fb
+Author: Marcel Abts <extern.marcel.abts@porsche.de>
+Date:   Wed Jan 6 09:02:04 2021 +0100
+
+    CRQ000010022018 removed duplicate casos@porsche.
+	
+	
+--------------------------------------------------
+
+yeu cau xoa domains A,B va umleiten den mot domain X nao do
+
+check xem co redirect cho domain X nao k. 
+neu co thi xoa file domains A,B
+xoa A,B trong file yaml tuong ung
+tim file yaml co umleiten cho domain X, them A,B
+
+20210111020019 
+
+
+---------------------------------------------------
+
+@ 3600 IN TXT "v=spf1 -all" <--- das heißt, 
+dass von keinem Mailserver aus Mails verschickt werden. Sie haben aber ja einen MX
+
+
+
+----------------------------------------------------
+
+TLS, check ASP hoac k. phu thuoc vao certcheck -v va -va. 
+Neu no kp tu cong ty do, dung outlook cha han thi la ASP.
+
+Len ITSM tao CRQ. 
+
+Doi Jens approve thi sau do them vao tls folder va playproud gateway.
+
+Inform nhung ng cho anforderung. 
+
+Len Z1, vao securemail, mandators porsche, action, create roi tuy chon.
+
+trong window thi them CRQ vao description va chon outbound. 
+save and done.
+
+neu co INC ve SMTL_TLS Consistancy CRIT, thi la do chua add new domain vao Z1
+vi du : INC000010349641
+
+------------------------------------------------------
+
+dig ip voi cac hostname phai check xem no duoi gi. 
+
+emea.porsche.biz thi phai dig o server appmail vi du dezulmlgml003.emea.porsche.biz
+neu dung dezuemlgml005 hoac dezuimlggw003 thi dig k ra gi.
+
+
+
+
+
+
+
+
+
+
+
+
