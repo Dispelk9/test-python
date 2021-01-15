@@ -77,8 +77,19 @@ dig ip voi cac hostname phai check xem no duoi gi.
 emea.porsche.biz thi phai dig o server appmail vi du dezulmlgml003.emea.porsche.biz
 neu dung dezuemlgml005 hoac dezuimlggw003 thi dig k ra gi.
 
+------------------------------------------------------
+9.Keyword zgrep, .gz, mail/log/archive
 
+zgrep cho .gz file
 
+-----------------------------------------------------
+10.Keyword Verteiler Postfach
+
+Adresse existiert --> doing nothing
+neues Verteiler   --> incident neues Verteiler
+neues Postfach    --> incident neues Postfach
+zu gestehenden    --> incident neues Verteiler mit Text überschreibung 
+Postfach dazu
 
 
 
