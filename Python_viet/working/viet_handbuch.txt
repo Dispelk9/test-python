@@ -91,6 +91,18 @@ neues Postfach    --> incident neues Postfach
 zu gestehenden    --> incident neues Verteiler mit Text überschreibung 
 Postfach dazu
 
+-----------------------------------------------------
+
+11. Fingerprint mit TLS
+
+Fingerprint ist immer nur eine Ausnahme, wenn weder certcheck -va noch certcheck -v funktionieren, 
+wir aus bestimmten Gründen ausnahmsweise aber trotzdem verschlüsseln wollen.
+Das machen wir immer noch kurzzeitig, bis die ein Zertifikat beschafft haben, dass dann TAFile oder secure kann.
+in dem fall ist das ein porschezentrum, das im mai von einem neuen betreieber übernommen wird,
+weshalb die jetzt für die vier monate kein neues OV mehr beschaffen werden. im mai 
+tauschen wir dann den fingerprint gegen secure aus
+http://www.postfix.org/TLS_README.html#client_tls <-- 
+hier sind die unterschiede zwischen none/may/encrypt/fingerprint/verify und secure beschrieben
 
 
 

@@ -1,4 +1,3 @@
-#! python 2.7
 # send_mail check_mail
 
 import smtplib
