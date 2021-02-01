@@ -44,7 +44,7 @@ neu co thi xoa file domains A,B
 xoa A,B trong file yaml tuong ung
 tim file yaml co umleiten cho domain X, them A,B
 
-20210111020019 
+20210111020019      
 
 ---------------------------------------------------
 6.Keyword SPF
@@ -102,7 +102,7 @@ in dem fall ist das ein porschezentrum, das im mai von einem neuen betreieber ü
 weshalb die jetzt für die vier monate kein neues OV mehr beschaffen werden. im mai 
 tauschen wir dann den fingerprint gegen secure aus
 http://www.postfix.org/TLS_README.html#client_tls <-- 
-hier sind die unterschiede zwischen none/may/encrypt/fingerprint/verify und secure beschrieben
+hier sind die unterschiede zwischen /none/may/encrypt/fingerprint/verify und /secure beschrieben
 
 
 
