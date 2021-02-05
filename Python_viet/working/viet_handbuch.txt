@@ -36,7 +36,7 @@ Date:   Wed Jan 6 09:02:04 2021 +0100
 	
 	
 --------------------------------------------------
-5.Keyword umleiten generic
+5.Keyword umleiten generic /redirect
 yeu cau xoa domains A,B va umleiten den mot domain X nao do
 
 check xem co redirect cho domain X nao k. 
@@ -104,10 +104,44 @@ tauschen wir dann den fingerprint gegen secure aus
 http://www.postfix.org/TLS_README.html#client_tls <-- 
 hier sind die unterschiede zwischen /none/may/encrypt/fingerprint/verify und /secure beschrieben
 
+----------------------------------------------------------
+12. Reject mail
+dezulmlgap003:/mail/logarchive/rejectmails <-- hier findest du normal kopien aller reject emails
+
+-----------------------------------------------------------
+13. CNAME path URL
+
+nein.... ein CNAME kopiert ja alle ressource records von seinem ziel. 
+das muss also eine domain sein, keine url mit pfad drin...
+
+und wenn es auf dem ziel keinen vhost dafür gibt,
+bringt auch ein cname auf porsche-france.fr nix, weil der dann einfach seine default-site ausliefert
+
+a IN CNAME b
+
+b IN A 1.2.3.4
+b IN TXT "bla"
+
+ist ja das gleiche wie 
+
+a in A 1.2.3.4
+
+a IN TXT "bla"
+
+b in A 1.2.3.4
+
+b IN TXT "bla"
 
 
+----------------------------------------------------------
 
+14. highway, cichain, skyway
 
+sag ich ihm schon  alles wo highway, cichain oder skyway  dran steht bitte immer erst zu mir
 
-
+----------------------------------------------------------
+15. Email Absender =/= Absenderadressen of antwortfahigkeit (if different and there are two email)
+so neue Verteiler, INC created
+die beiden ansprechpartner von oben als besitzer und 
+die zwei adressen die er unten genannt hat als mitglieder
 
