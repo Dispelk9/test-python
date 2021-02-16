@@ -1,0 +1,279 @@
+Handbook cua viet voi PAG/SMTP/DNS
+
+1.Keyword new Domain
+neue Domain porsche-cloud.com
+need beschreibung
+check porsche-paris.fr for references.
+
+------------------------------------------------
+2.Keyword Firewall
+'CU BULKMAILER THI CO FIREWALL FREISTELLUNG' 
+"es ist ja eine firewall zwischen dem bulkmail-server und dem internet... 
+wenn da einer was einliefern will, muss das geöffnet werden"
+Firewall freischaltung cho tat ca Bulkmail, chon Internet va dung
+"SEC-Request for groups
+hoac 
+SEC-Decommission"
+Name:
+Neue Host für Bulkmailer
+Description:
+Für eine neue AppMail Freischaltung auf dem third party Mailer. 
+Sollen neue Hosts in die Gruppe der Bulkmail Clients aufgenommen werden.
+"Dung internet vi thuong extranet da dc mo san."
+extranet
+new request --> SEC-Request for groups, edit groups --> SMTP-External-Bulkmail-Client-P
+Device:dest517x-fwm01 Group:SMTP_EXTERNAL_BULKMAIL_CLIENTS_P
+Michael Ionescu
+"thanh 3 soc ben phai"
+add name: IP-XXX.XXX.XXX
+IP: XXX.XXX.XXX.XXX
+Description: ten cua APPMAIL
+------------------------------------------------
+3.Keyword APPMAIL external, internal
+external: true
+along with
+internal_domains: true
+leads to the fact that only the internal domains can be written to.
+
+internal_domains: true only if there are also entries in to: for external domains. 
+
+For any internal + external recipients, internal_domains: must be false
+
+
+------------------------------------------------
+4.Keyword Weiterleitung
+Weiterleitung chi duoc 1 lan trong ~/mail-hq/vars/roles/common/vars/addresses.d>
+
+commit 0d4d87aae118f93bc19452c7304443732f1b29fb
+Author: Marcel Abts <extern.marcel.abts@porsche.de>
+Date:   Wed Jan 6 09:02:04 2021 +0100
+
+    CRQ000010022018 removed duplicate casos@porsche.
+	
+	
+--------------------------------------------------
+5.Keyword umleiten generic /redirect
+yeu cau xoa domains A,B va umleiten den mot domain X nao do
+
+check xem co redirect cho domain X nao k. 
+neu co thi xoa file domains A,B
+xoa A,B trong file yaml tuong ung
+tim file yaml co umleiten cho domain X, them A,B
+
+20210111020019      
+
+---------------------------------------------------
+6.Keyword SPF
+@ 3600 IN TXT "v=spf1 -all" <--- das heißt, 
+dass von keinem Mailserver aus Mails verschickt werden. Sie haben aber ja einen MX
+
+---------------------------------------------------
+7.Keyword: TLS
+TLS, check ASP hoac k. phu thuoc vao certcheck -v va -va. 
+Neu no kp tu cong ty do, dung outlook cha han thi la ASP.
+
+Len ITSM tao CRQ. 
+
+Doi Jens approve thi sau do them vao tls folder va playproud gateway.
+
+Inform nhung ng cho anforderung. 
+
+Len Z1, vao securemail, mandators porsche, action, create roi tuy chon.
+
+trong window thi them CRQ vao description va chon outbound. 
+save and done.
+
+neu co INC ve SMTL_TLS Consistancy CRIT, thi la do chua add new domain vao Z1
+vi du : INC000010349641
+
+------------------------------------------------------
+8.Keyword porsche.biz   IP ermitteln
+dig ip voi cac hostname phai check xem no duoi gi. 
+
+emea.porsche.biz thi phai dig o server appmail vi du dezulmlgml003.emea.porsche.biz
+neu dung dezuemlgml005 hoac dezuimlggw003 thi dig k ra gi.
+
+------------------------------------------------------
+9.Keyword zgrep, .gz, mail/log/archive
+
+zgrep cho .gz file
+
+-----------------------------------------------------
+10.Keyword Verteiler Postfach
+
+Adresse existiert --> doing nothing
+neues Verteiler   --> incident neues Verteiler
+neues Postfach    --> incident neues Postfach
+zu gestehenden    --> incident neues Verteiler mit Text überschreibung 
+Postfach dazu
+
+-----------------------------------------------------
+
+11. Fingerprint mit TLS
+
+Fingerprint ist immer nur eine Ausnahme, wenn weder certcheck -va noch certcheck -v funktionieren, 
+wir aus bestimmten Gründen ausnahmsweise aber trotzdem verschlüsseln wollen.
+Das machen wir immer noch kurzzeitig, bis die ein Zertifikat beschafft haben, dass dann TAFile oder secure kann.
+in dem fall ist das ein porschezentrum, das im mai von einem neuen betreieber übernommen wird,
+weshalb die jetzt für die vier monate kein neues OV mehr beschaffen werden. im mai 
+tauschen wir dann den fingerprint gegen secure aus
+http://www.postfix.org/TLS_README.html#client_tls <-- 
+hier sind die unterschiede zwischen /none/may/encrypt/fingerprint/verify und /secure beschrieben
+
+----------------------------------------------------------
+12. Reject mail
+dezulmlgap003:/mail/logarchive/rejectmails <-- hier findest du normal kopien aller reject emails
+
+-----------------------------------------------------------
+13. CNAME path URL
+
+nein.... ein CNAME kopiert ja alle ressource records von seinem ziel. 
+das muss also eine domain sein, keine url mit pfad drin...
+
+und wenn es auf dem ziel keinen vhost dafür gibt,
+bringt auch ein cname auf porsche-france.fr nix, weil der dann einfach seine default-site ausliefert
+
+a IN CNAME b
+
+b IN A 1.2.3.4
+b IN TXT "bla"
+
+ist ja das gleiche wie 
+
+a in A 1.2.3.4
+
+a IN TXT "bla"
+
+b in A 1.2.3.4
+
+b IN TXT "bla"
+
+
+----------------------------------------------------------
+
+14. highway, cichain, skyway
+
+sag ich ihm schon  alles wo highway, cichain oder skyway  dran steht bitte immer erst zu mir
+
+----------------------------------------------------------
+15. Email Absender =/= Absenderadressen of antwortfahigkeit (if different and there are two email)
+so neue Verteiler, INC created
+die beiden ansprechpartner von oben als besitzer und 
+die zwei adressen die er unten genannt hat als mitglieder
+
+----------------------------------------------------------
+
+16. port 
+ 
+"da wir AWS nutzen wäre die Frage welche Einrichtung wir vornehmen müssen: 
+appmail-bulk.fw.porsche.de (Port 25) oder appmail-bulk.fw.porsche.de (Port 465)
+Dies wurde uns für unsere E & K Umgebung in AWS empfohlen, da der Port 25 von AWS geblockt ist."
+
+----------------------------------------------------------
+17. Resolver ITSM CRQ
+wir haben dns resolver, über die man aus dem Porsche-Netz heraus DNS-Anfragen aus dem Internet auflösen kann... 
+da gibt es Access Control lists drauf, welche IPs berechtigt sind, da abzufragen
+beispiel: CRQ000000313822
+what i did: CRQ000010026398
+Konfigurationselement: dns-extern
+Beschreibung: Die IPs aus dem OTRS-Ticket Ticket#20210205020023
+
+für die umsetzung hinterher müssen nur die IPs in ansible/files/resolverclients.yml im dnshq ergänzt werden.
+[15:09] Marcel Abts
+    https://freeway.porsche.org/dns/dnshq/-/edit/master/ansible/files/resolverclients.yml
+    du hast ja nen change... dann CRQ-Nummer
+    Assigne: ich und unten "delete source branch" ankreuzen
+-----------------------------------------------------
+17. iapps 
+" co fehler thi check xem no dung absender dung chua, co dung voi trong appmail regeln k"
+
+nein... die incidents sind ja für EMPFANG in exchange, die sind immer ohne iapps.
+Das hat mit dem Versand nix zu tun, dafür sind die Regeln im appmail-Verzeichnis
+
+20210204020019 Ticket 
+
+-----------------------------------------------------
+18. Confidential
+
+
+Vertrauliche Informationen dürfen außerhalb gesicherter Netzwerkzonen nur verschlüsselt übertragen werden.
+
+Bitte prüfen Sie,
+a) ob der Inhalt der E-Mails überhaupt vertraulich klassifizierte Informationen nach Richtlinie P08 enthält, 
+insbesondere auch beim Test-System und/oder
+b) ob eine erzwungene STARTTLS-Verschlüsselung von der Anwendung zu uns möglich ist. 
+
+----------------------------------------------------
+19. Extern/internal 
+20210210020020 
+Wenn auch externe Empfänger erreicht werden sollen funktioniert eine @iapps.porsche.de-Adresse nicht. 
+Da müsste dann die gleiche Adresse unter @porsche.,de beantragt werden.
+In die Felder "einschränkbare externe Empfängerdomains" tragen Sie dann bitte die 
+(internen und externen) Adressen ein oder fügen Sie eine Liste als Anhang bei, 
+Bitte keine Screenshots oder Scans. die "alle Empfänger"-Häkchen nehmen Sie dann bitte raus.
+Dafür müssen wir eine Sicherheitsfreigabe einholen, wird also 1-3 Tage üblicherweise dauern.
+
+---------------------------------------------------
+20. Server not correct make email can't send
+
+20210211020007 
+
+Soweit ich das sehe versenden Sie hier von der E-Mail-Adresse des Prod-Servers vom PoC-Server.
+2021-02-10 05:33:20:  HOST=dezulpagap259.emea.porsche.biz  
+IP=141.36.198.209  FROM=ih-sportwagen-dashboard@iapps.porsche.de  
+TO=IH-Sportwagen-Dashboard-Verteiler@porsche.de
+
+Die E-Mails die von poc-ih-sportwagen-dashboard@iapps.porsche.de versandt wurden, sind lt. 
+Logs von diesem Host akzeptiert worden.
+
+---------------------------------------------------
+21. CRQ Resolver, them warum va ai anforderung 
+
+---------------------------------------------------
+22. Resolver 
+das playbook rollt ja nur auf server aus... dezuidnsgw002/003 usatidnsgw001/002 sind resolver
+
+[16:12] Marcel Abts
+    dezuidnsns003/004 und usatidnsns001/002 isat auth, dezuidnsns005/006 
+    und usatidnsns003/004 sind geodns
+
+--------------------------------------------------
+23. Ansprech_partner 
+
+Die technischen Ansprechpartner werden von uns kontaktiert, wenn es Probleme oder Störungen im Zusammenhang mit
+dem Mailversand gibt, wenn versandte E-Mail wegen fehlender Freischaltungen blockiert wurden oder wenn 
+Änderungen erforderlich sind.
+Der Verantwortliche ist der, der die formale Verantwortung für den Mailversand trägt, 
+aber mit der Verwaltung der Anwendung nicht zwangsweise etwas zu tun hat. 
+Der technische Ansprechpartner und der Verantwortliche können auch die gleiche Person sein. 
+
+Für den technischen Ansprechpartner hätten wir gern einen Vertreter, den wir kontaktieren können, 
+wenn aufgrund von Urlaub, Krankheit, Abteilungs- oder Unternehmenswechsel der 1. technische Ansprechpartner 
+nicht erreicht werden kann.
+
+Die möglichen Empfänger werden nicht namentlich festgelegt. Porsche-interne Empfänger können Sie durch
+ein Kreuz bei "alle Empfänger unter o.g. Mandanten" oder "alle Empfänger innerhalb des Porsche-Netzes" 
+freischalten lassen. Externe Empfänger sollten per Domain eingeschränkt werden und nur wenn das nicht 
+möglich ist das X bei "beliebige externe Empfänger" gesetzt werden.
+
+Im Screenshot steht bei Mandant noch Porsche Brasilien (PBR) - wählen Sie hier bitte die richtige 
+Konzerngesellschaft aus (z.B. PAG).
+
+------------------------------------------------------------
+24.  ASP_Erklärung
+
+wait 7 days, send 2nd wait 7 days.
+CRQ: Dekonfigurieren mTLS wegen abgelaufener ASP-Erklärung
+CRQ000010026792
+change in Z1 first, delete it, then tls_policy_d
+
+---------------------------------------------------------------
+25. SAP 
+origin k co gi -> origin: [] , this is a leer list.
+phai co clients zB: clients: - SAP-P01
+k can mandators
+clients: roles/postfwd/vars/client_includes/
+clients: sind origins, die bereits als vorlage hinterlegt sind. 
+Da origins und clients aneinander gehängt werden, muss origins entweder einträge haben
+ oder eine leere liste sein.
+ nur origins: wäre ein string und strings und listen können nicht aneinander gehängt werden
