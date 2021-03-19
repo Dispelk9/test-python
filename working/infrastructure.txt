@@ -1,0 +1,10 @@
+ansible:
+[11:08] Phuoc Hoang Ly
+    genau in roles hast du folgende Ordner
+​[11:08] Phuoc Hoang Ly
+    Tasks --> Da sind die eigentlichen Aufgaben
+​[11:09] Phuoc Hoang Ly
+    files --> Da legst du Dateien ab, die auf die Clients verteilt werden sollen
+​[11:09] Phuoc Hoang Ly
+    handler --> Aktionen die durchgeführt werden sollen, wenn etwas bestimmtes erfolgt ist. 
+    Dadurch brauchst du keine wenn dann funktionen in den Tasks erstellen.

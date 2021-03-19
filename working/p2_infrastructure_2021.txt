@@ -1,0 +1,29 @@
+Benötigte Server:
+
+1x Management Server -> check_mk, ansible Master
+1x Primary DNS Server
+1x Webserver m. PHP und DB
+1x Dev Webserver mit PHP und DB
+1x SMTP/IMAP Server
+Pandora von jetziger Infrastruktur migrieren
+
+Evtl. Webserver mit PHP 5.3/5.4
+
+herzne
+nvme ssa 
+
+# Command
+virsh destroy
+virsh list
+virsh undefine 
+lvremove /dev/vg0/dnsserver*
+virsh start
+setup Ip in /etc/network/interfaces
+
+
+# cronjob cron crontab
+cron is the name of the tool, crontab is generally 
+the file that lists the jobs that cron will be executing, and those jobs are, surprise surprise, cronjobs.
+
+# restic
+# ansible

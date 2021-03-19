@@ -41,7 +41,7 @@ For any internal + external recipients, internal_domains: must be false
 
 
 ------------------------------------------------
-4.Keyword Weiterleitung
+4.Keyword Weiterleitung , neue MailDomain
 Weiterleitung chi duoc 1 lan trong ~/mail-hq/vars/roles/common/vars/addresses.d>
 
 commit 0d4d87aae118f93bc19452c7304443732f1b29fb
@@ -49,6 +49,12 @@ Author: Marcel Abts <extern.marcel.abts@porsche.de>
 Date:   Wed Jan 6 09:02:04 2021 +0100
 
     CRQ000010022018 removed duplicate casos@porsche.
+
+neue Maildomain also domains.yml erweitern
+weiterleitung: dafür legst du unter roles/common/vars/addresses.d eine datei porsche-drive.de.yml an 
+und trägst dann da die Weiterleitungen ein. 
+Syntax siehst du in den anderen files in dem ordner
+CRQ with porsche-drive.de
 	
 	
 --------------------------------------------------
@@ -104,9 +110,10 @@ zgrep cho .gz file
 Adresse existiert --> doing nothing
 neues Verteiler   --> incident neues Verteiler
 neues Postfach    --> incident neues Postfach
-zu gestehenden    --> incident neues Verteiler mit Text überschreibung 
-Postfach dazu
-
+zu gestehenden    --> incident neues Verteiler mit Text überschreibung Postfach dazu
+z.B
+"bitte die Adressen skyway-buildslaves@porsche.de und skyway-buildslaves-k@porsche.de
+als Alias zum bestehenden Postfach highway-admin@porsche.de hinzufügen"
 -----------------------------------------------------
 
 11. Fingerprint mit TLS
@@ -157,10 +164,23 @@ sag ich ihm schon  alles wo highway, cichain oder skyway  dran steht bitte immer
 
 ----------------------------------------------------------
 15. Email Absender =/= Absenderadressen of antwortfahigkeit (if different and there are two email)
+#existiert bereits als Postfach oder Verteiler
 so neue Verteiler, INC created
 die beiden ansprechpartner von oben als besitzer und 
-die zwei adressen die er unten genannt hat als mitglieder
+die zwei adressen die er unten genannt hat als mitglieder KIRA appmail
+INC000010395881
+z.B: 
+Bitte folgenden neuen Verteiler anlegen:
 
+Name: PAG-KIRA-P
+
+SMTP Adresse: kira-prod@porsche.de
+
+Verantwortlich (mindestens 2 Personen): stephan.vetter@porsche.de, patrick.ege@porsche.de
+
+Mitglieder: IT-support-IAM@porsche.de, manager.account@porsche.de
+
+Von extern erreichbar: (ja/nein)  nein
 ----------------------------------------------------------
 
 16. port 
@@ -277,3 +297,207 @@ clients: sind origins, die bereits als vorlage hinterlegt sind.
 Da origins und clients aneinander gehängt werden, muss origins entweder einträge haben
  oder eine leere liste sein.
  nur origins: wäre ein string und strings und listen können nicht aneinander gehängt werden
+
+ Ja, SAP tut das schon manchmal als Person. Nur @porsche.de als Absender geht nicht. 
+ Entweder @local.porsche.de 
+ oder alle personen namentlich aufführen (Beispiel für dich ist da z.B. lan.d/SAP-P01-Personen)
+
+ --------------------------------------------------------------
+ 26. Telefon: SMTP
+ haben Sie schon ein Ticket gestellt?
+ welche Ticket ist das?
+ Leider habe ich momentan kein Antwort, Lösung für diese Ticket. 
+ dauert ein bisschen mehr Zeit, wir haben kein Zugriff zur Firewall Freistellung. wir stellen eine Anforderung.
+
+---------------------------------------------------------------
+27. error check mail/log/
+dezuimlggw005 / 006 sind die appmail-server.... 
+"zgrep appcenter /mail/log/archive/202102/20210216*"
+
+
+--------------------------------------------------------------
+27. "local sender domains not permitted in incoming mail"
+
+
+"local sender domains not permitted in incoming mail" kommt, wenn man von @porsche.de als Absender 
+an mail02.fw.porsche.de oder mail.fw.porsche.de einliefert 
+und nicht auf appmail-bulk-de01.fw.porsche.de
+
+Marcel answers:
+
+Hier werden die E-mails am "normalen" Mailserver für eingehende externe E-mails eingeliefert
+und nicht wie bei sponsoring@porsche.de auf unserem AppMail-Server für Cloud-Anwendungen.
+
+Falls Ihre Applikation dies unterstützt verwenden Sie bitte unseren MX Eintrag:
+appmail-bulk.fw.porsche.de (Port 25)
+
+Ansonsten:
+appmail-bulk-de01.fw.porsche.de (Port 25)
+und/oder
+appmail-bulk-de02.fw.porsche.de (Port 25)
+
+
+Auf dem MX (mail.fw.porsche.de / mail02.fw.porsche.de), wo normale eingehende E-Mails 
+eingehen, sind @porsche.de-Adressen nicht erlaubt, um Phishing-Angriffe zu verhindern. 
+Deshalb werden solche Adressen auf dem anderen Mailserver ja extra per Regel berechtigt.
+
+Mit freundlichen Grüßen / Kind regards
+
+Marcel Abts
+
+ux-dssp90g@dezuimlggw003:/mail/postfix/etc/postfix/maps> vim senderchecks_outbound.auto-gateway
+
+----------------------------------------------------------------------------------------
+28. bulkmail_server and appmail_server
+
+"mail.fw.porsche.de/mail02.fw.porsche.de sind 002/003 ....
+die sind für alle ganz normalen emails, die wir so den ganzen tag aus aller welt bekommen
+
+und da dürfen von außen nur fremde domains kommen"
+
+"005/006 sind dann appmail-bulk... und da dürfen alle rein kommen, die per appmailregel freigeschaltet
+sind, aber eben auch interne domains"
+20210210020014 Vi du:
+dung email @porsche.de gui qa dezuimlggw002,003 den mot @porsche.de se nhan fehler, vi co code block, tranh
+bi Phishing. 
+neu dung dezuimlggw005,006 thi ksao ca, nhung chi dc intern.
+
+----------------------------------------------------------------------------------------
+29. Size 
+
+2021-02-17T15:45:03.561284+01:00 dezulmlgml003 postfix/qmgr[4700]: 7BBCD300007A: 
+from=<ATZ-Abfindungen@iapps.porsche.de>, size=987, nrcpt=1 (queue active)
+ 
+Die Mail, die bei uns eingegangen ist, war nur 987 Byte groß, da kann kein Inhalt drin gewesen sein
+
+contact SAP-Operation, if send successful but no content at the receiver
+
+check dezuemlgml005, dezulmlgml003,
+check tiep queue as smt , grep smt, xem proxy-accept va status 
+"proxy-accept" heißt, dass wir die mail entegegen genommen haben und 
+"status=sent" (250 ... dass wir sie an den nächsten server folgreich losgeworden sind
+-----------------------------------------------------------------------------------
+30. IBM, CSV_data on Z1.
+checking TLS mit dezuimlggw003. mail/log/ check mail.info 
+less mail.info
+control c
+?ten_domain_mx 
+vidu: 
+" Verified TLS connection established to mx0b-001b2d01.pphosted.com[148.163.158.5]:25:
+ TLSv1.2 with cipher ECDHE-RSA-AES25
+6-GCM-SHA384 (256/256 bits)
+"
+
+Z1: phai lam csv data.
+
+
+------------------------------------------------------------------------------------
+31. INC000010420003 INC000010420027
+
+SMTP | MAILQ | TLS communication gottfried-schultz.de problem: 
+Server certificate not trusted (/mail/log/check_mailq_pattern.log)
+
+SMTP | MAILQ | TLS communication gottfried-schultz.de problem: delivery temporarily suspended: 
+Server certificate not trusted (/mail/log/check_mailq_pattern.log)
+
+Du ksnnst die Domain auf der Z1 disablen und in der Config auskommentieren, 
+da der Fehler wahrscheinlich nur vorübergehend ist.
+
+------------------------------------------------------------------
+32. Bouncing 
+z1 ausmachen, bouncen, dekonfigurieren
+SMTP | MAILQ | TLS communication gottfried-schultz.de problem:
+Server certificate not trusted (/mail/log/check_mailq_pattern.log)
+
+
+gottfried-schultz.de secure ciphers=high <--- das sagt ja, nur zustellen, 
+wenn das Zertifikat gültig und vertrauenswürdig ist. Weil die ein neues Zertifikat haben,
+was nicht vertrauenswürdig ist, aber wir die mail in der queue behalten und der INC ging auf
+
+als du das dann auskommentiert hast (gelöscht wäre das gleiche), war diese anweisung ja nicht mehr da 
+und standard ist nicht "secure" 
+sondern "may"... d.h. er schickt die mail dann raus, egal ob der ein zertifikat ist oder nicht
+
+"mailq | grep domain -C 3" sollte dir die mails anzeigen
+---------------------------------------------------------------------
+33. Bitte User (p319426) in den TDV Mailserver mit aufnehmen - Danke.
+
+vim vars/appmail/lan.d/PAG-TDV.yml
+---------------------------------------------------------------------
+34. Umrouten, khi ASP va Subject in certcheck khac nhau
+dafür trägt man dann in der roles/postfix/files/classes/gateway/maps/transport 
+einen eintrag nach folgendem Schema ein:
+domain     :[ziel]
+[12:55] Marcel Abts
+    also z.B. bloecher.net :[bloecher-net.mail.protection.outlook.com]
+    nein, wenn man was in die postfix-transport-datei einträgt, sagt man, dass man 
+    den MX der DNS Zone ignorieren will und stattdessen dahin routet was da hinter dem doppelpunkt 
+    eingetragen ist
+
+Bei CRQ: schreib statt "MX" da "Transport:" drüber und noch einen Satz 
+"Offizieller MX hat keine passenden Zertifikate, daher manuelles Routing direkt in Office365"
+
+ah es gibt inzwischen dafür ein eigenes TAFIle: mail/postfix/etc/postfix/cacerts/trustanchors.special/o365.pem
+ja statt tafile=mail/postfix/etc/postfix/cacerts/trust_anchor.pem nimmst du das
+---------------------------------------------------------------
+35. Inbound Outbound
+Outbound 3 di ra, Inbound 2 di vao 
+---------------------------------------------------------------
+36. Extranet, lan
+ja halt einmal mit emea.porsche.biz im LAN und mit porsche.org im Extranet
+dezuE <-- Extranet, dezuL <-- LAN
+
+--------------------------------------------------------------
+37. Dianogse for Receiver
+InternalID 
+--------------------------------------------------------------
+38. TLS-match 
+2 match : match=.sophos.com:.rittersbacher.de wäre es dann
+
+--------------------------------------------------------------
+39. DNS cannot find MX CNAME
+;porsche-zhengzhou-zhongyuan.com. IN    CNAME
+
+;; AUTHORITY SECTION:
+porsche-zhengzhou-zhongyuan.com. 3588 IN SOA    dns.porsche.de. hostmaster.porsche.de. 2019032101 10800 1800 2592000 3600
+
+check file pcn.yml xem co zonefile nay chua
+---------------------------------------------------------------
+40. extern, intern tron appmail
+external: yes und kein to, dann auch internal: false... 
+wenn external: yes und ein to: da ist, muss auch internal_doimains: yes sein
+das liegt daran, dass die regel so funktioniert: gibt es kein to, darf man an alle senden.
+gibt es ein to, dann nur an die, die darin aufgeführt sind
+und das internal_domains: yes fügt ja quasi nur alle domains aus der domains.yml automatisch bei to: hinzu
+
+---------------------------------------------------------------
+41. Hard bounce , Soft bounce
+A hard bounce is an email that couldn't be delivered for permanent reasons. Maybe the email's a fake address,
+maybe the email domain isn't a real domain, or maybe the email recipient's server won't accept emails. 
+There are lots of reasons that an email could be a hard bounce, but the core of it is that it's a permanent failure. 
+You should remove all of these addresses from your list (if you're a HubSpot customer, we'll ensure hard bounce addresses won't 
+receive emails from you so your sender reputation remains in tact). 
+
+A soft bounce is an email that couldn't be delivered because of temporary reasons. 
+An inbox may be full or the email file might be too large, among other reasons. 
+If they get a soft bounce on an email send, most email providers will continue to try to deliver the email over the period of a few days. 
+You should keep an eye on these addresses -- if you notice that the same ones are popping up over and over again, it's best to remove them.
+
+---------------------------------------------------------------
+42. Domain Name Expiration Warning close able.
+Ticket#20210312020005 — panamera.gr Προειδοποίηση Λήξης Ονόματος Χώρου / Domain Name Expiration Warning
+<-- sowas zB
+
+---------------------------------------------------------------
+43. MXToolbox
+
+MxToolbox Blacklist Summary (z.B.: Ticket#20210315020007 )
+-> wenn da in jeder Zeile "not blacklisted" steht, kann das Ticket direkt geschlossen werden
+--------------------------------------------------------------
+44. Liquidation
+ja "in Liquidation" bedeutet, dass die Firma gerade aufgelöst wird. Kannst du n CRQ zum dekonfigurieren machen.
+
+CRQ000010026792
+--------------------------------------------------------------
+45. address 0170911*@vodafone-sms.de 
+oder halt klammern.... (01702911)([0-9]+)@vodafone-sms.de ... .+ sollte m.E. reichen
