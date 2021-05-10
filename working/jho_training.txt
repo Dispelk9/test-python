@@ -1,0 +1,29 @@
+
+Things to ask Jens:
+KVM
+Checkmx - for monitoring 
+Ansible
+tafile
+certcheck the problem with certificate not trusted. 
+NPC
+Ophardt
+Migration DNS 
+
+
+Sicherheit zone architeckture 1.0 LAN >> EXTRANET >> INTERNET-DMZ >> Firewall?
+iapp?
+Sicherheit zone architeckture 2.0 
+einzelne Insel?
+jeder Projekt muss eine Firewall Antrag stellen?
+
+New server for 2.0 ? 
+Problem nicht einfach lokalisieren? 
+server? 
+Faulst
+
+destr == SZA 2.0? 
+Marcel fragen über destr?
+
+Cloud Appmail. Porsche (AWS AZURE) nhieu project, email senden. Appmail benutzen? Cloud App k co fest IP. (Fix IP)
+Service aufbauen, new Version?
+

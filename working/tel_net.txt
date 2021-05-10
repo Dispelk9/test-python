@@ -1,0 +1,53 @@
+ux-dssp90g@dezuimlggw003:/mail/log> dig mx p-square.de
+
+; <<>> DiG 9.11.22 <<>> mx p-square.de
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 48249
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 4096
+; COOKIE: b65db0778b63bcc701000000606f122198d0b40dc384d46b (good)
+;; QUESTION SECTION:
+;p-square.de.                   IN      MX
+
+;; ANSWER SECTION:
+p-square.de.            2308    IN      MX      0 psquare-de0c.mail.protection.outlook.com.
+
+;; Query time: 0 msec
+;; SERVER: 84.21.34.135#53(84.21.34.135)
+;; WHEN: Thu Apr 08 16:24:33 CEST 2021
+;; MSG SIZE  rcvd: 124
+
+ux-dssp90g@dezuimlggw003:/mail/log> telnet psquare-de0c.mail.protection.outlook.com. 25
+Trying 104.47.8.36...
+Connected to psquare-de0c.mail.protection.outlook.com..
+Escape character is '^]'.
+220 AM5EUR03FT003.mail.protection.outlook.com Microsoft ESMTP MAIL Service ready at Thu, 8 Apr 2021 14:24:51 +0000
+ehlo p-square.de
+250-AM5EUR03FT003.mail.protection.outlook.com Hello [84.21.34.143]
+250-SIZE 157286400
+250-PIPELINING
+250-DSN
+250-ENHANCEDSTATUSCODES
+250-STARTTLS
+250-8BITMIME
+250-BINARYMIME
+250-CHUNKING
+250 SMTPUTF8
+MAIL FROM:<extern.ai_viet.hoang@porsche.de>
+250 2.1.0 Sender OK
+RCPT TO:<viet.hoang@p-square.de> NOTIFY=sucess,failure
+501 5.5.4 Invalid arguments [AM5EUR03FT003.eop-EUR03.prod.protection.outlook.com]
+RCPT TO:<viet.hoang@p-square.de>
+250 2.1.5 Recipient OK
+DATA
+354 Start mail input; end with <CRLF>.<CRLF>
+Subject: test mail from porsche
+this is a test message
+.
+250 2.6.0 <3d56fd36-6fcb-41cd-9c6e-89a115ec31c0@AM5EUR03FT003.eop-EUR03.prod.protection.outlook.com> [InternalId=137438960286, Hostname=PAXPR03MB7665.eurprd03.prod.outlook.com] 7335 bytes in 0.062, 113.850 KB/sec Queued mail for delivery
+quit
+221 2.0.0 Service closing transmission channel
+Connection closed by foreign host.

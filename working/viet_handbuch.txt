@@ -1,5 +1,6 @@
 Handbook cua viet voi PAG/SMTP/DNS
 
+
 1.Keyword new Domain
 neue Domain porsche-cloud.com
 need beschreibung
@@ -7,7 +8,8 @@ check porsche-paris.fr for references.
 
 ------------------------------------------------
 2.Keyword Firewall
-'CU BULKMAILER THI CO FIREWALL FREISTELLUNG' 
+'CU BULKMAILER THI CO FIREWALL FREISTELLUNG'
+new Netzwerkzonen thi co the lan.d phai FW freischalten 
 "es ist ja eine firewall zwischen dem bulkmail-server und dem internet... 
 wenn da einer was einliefern will, muss das geöffnet werden"
 Firewall freischaltung cho tat ca Bulkmail, chon Internet va dung
@@ -19,6 +21,8 @@ Neue Host für Bulkmailer
 Description:
 Für eine neue AppMail Freischaltung auf dem third party Mailer. 
 Sollen neue Hosts in die Gruppe der Bulkmail Clients aufgenommen werden.
+Für eine Erweiterung der AppMail Regel  
+Sollen neue Hosts in die Gruppe der Bulkmail Clients aufgenommen werden.
 "Dung internet vi thuong extranet da dc mo san."
 extranet
 new request --> SEC-Request for groups, edit groups --> SMTP-External-Bulkmail-Client-P
@@ -28,15 +32,17 @@ Michael Ionescu
 add name: IP-XXX.XXX.XXX
 IP: XXX.XXX.XXX.XXX
 Description: ten cua APPMAIL
+
+Submask okay, without * using typ: network, check /submask roi dien mask cho dung. vi du /26 thi la 192
+CIDR Notation sollte gehen
+
 ------------------------------------------------
 3.Keyword APPMAIL external, internal
 external: true
 along with
 internal_domains: true
 leads to the fact that only the internal domains can be written to.
-
-internal_domains: true only if there are also entries in to: for external domains. 
-
+internal_domains: true only if there are also entries in to: for eternal domains. 
 For any internal + external recipients, internal_domains: must be false
 
 
@@ -92,6 +98,8 @@ save and done.
 neu co INC ve SMTL_TLS Consistancy CRIT, thi la do chua add new domain vao Z1
 vi du : INC000010349641
 
+Digicert is bad
+Sectigo gut 
 ------------------------------------------------------
 8.Keyword porsche.biz   IP ermitteln
 dig ip voi cac hostname phai check xem no duoi gi. 
@@ -501,3 +509,189 @@ CRQ000010026792
 --------------------------------------------------------------
 45. address 0170911*@vodafone-sms.de 
 oder halt klammern.... (01702911)([0-9]+)@vodafone-sms.de ... .+ sollte m.E. reichen
+
+--------------------------------------------------------------
+46.  Cert Informationen für TLS
+Vorlage Info - Zertifikate bestellen
+--------------------------------------------------------------
+47. @ and CNAME 
+CNAME darf ja nicht neben anderen records stehen und bei @ hast du ja immer auch mindestens SOA und NS... 
+deshalb muss das ein A oder AAAA sein
+--------------------------------------------------------------
+48. other domains Ticket#20210329020020
+für lamborghini-fs.com  -> 4help@vw.com (auf Englisch)
+für bentleyfs.com -> borut.bezjak@comlaude.com (auf Englisch)
+lamborghini-services.com 
+lamborghini.com ask 
+Thomas Schell
+Digital Brand Management
+riccardo.fabbri@nohup.it lamborghini-financialservices.com
+
+
+DOMAINEXPERTEN - ein Service der / a service of:
+
+CAMAO IDC GmbH
+Etzelstraße 1-25
+D - 74076 Heilbronn
+
+Fon: Office: +49 7131 7999-200 / Mobil: +49 170 9129020
+Email: support@domainexperten.de
+
+https://skyway.porsche.com/confluence/display/DNSBETR/%5BBHB_SPL-2516%5D%3A+Ansprechpartner
+-> Hier sind die Ansprechpartner, die ich kenne 
+--------------------------------------------------------------
+49. SPF
+https://www.spf-record.de/syntax <-- lies dir das mal durch, wie ein SPF funktioniert
+ich hab den SPF aber nochmal geändert ... "v=spf1 -all" ist auch nicht richtig, 
+es muss "v=spf1 include:spf.porsche.de -all" sein, sonst dürften auch wir keine emails verschicken 
+
+"v=spf1 -all" <--kein Mailserver darf E-Mails verschicken.
+"v=spf1 include:spf.porsche.de -all" <--- nur die Servver, 
+die im SPF von spf.porsche.de genannt sind, dürfen Mails verschicken
+wenn jemand seine eigenen mailserver benutzt, wie z..B. bei nem Porschezentrum, 
+dann können die auch SPF setzen lassen
+
+-------------------------------------------------------------
+50. UXMON SERVERS SMTP
+dezuimlgml002.porsche.org P-Appmail De
+dezuimlggw003 Gateway1
+gw006 bulkgateway2
+dezuimlgml003.emea.porsche.biz P-appmail DE
+dezuemlgml007 appmail
+dezuimlggw005 bulkgateway1 
+
+-------------------------------------------------------------
+51. Registrar registering
+checking with WHOIS
+
+
+-------------------------------------------------------------
+52. check_smtp_partners.log 
+check_smtp_partners log durchsucht die tls policy, und schaut, mit welchen Servern wir TLS konfiguriert haben.
+Und schaut dann, ob eine SMTP Verbindung mit gültigem Zertifikat zu dem Server hergestellt werden kann
+[10:29] Jens Hoffrichter
+    Wenn das drei mal hintereinander fehlgeschlagen hat, macht es einen Incident auf
+-------------------------------------------------------------
+53. check_mailq_pattern.log
+check_mailq_pattern.log verstehe ich so,
+wenn eine mail nicht geschickt werden kann und bleibt es in mail queue, dann wird eine Warnung gestellt.
+
+-------------------------------------------------------------
+54. Dashboard
+[23.12.20 12:55] Thorsten Habich
+    https://highway.porsche.com/confluence/display/SMTP/%5BSDO_ICTO-932%5D%3A+Systemumgebungskonzept 
+    da steht welche Systeme wir haben, welche funktion sie erfüllen und ob es E, K oder P ist
+-------------------------------------------------------------
+55. FW Frischfreischaltung 
+Systemarch_Übersicht_Firewallgruppen_und_Kommunikationsbeziehungen
+https://skyway.porsche.com/confluence/pages/viewpage.action?pageId=170864705
+
+-------------------------------------------------------------
+54. SMTP | PARTNER | mx.rac.de - Can\'t establish tls - domains: rac.de (/mail/log/check_smtp_partners.log) 
+bei gateway mit certcheck -v prüfen. und wenn es funktioniert, dann wird das Ticket zu? und wenn es nicht, 
+dann machen wir "pending" für das Ticket? 
+Genau  Pending und am nächsten Tag nochmal prüfen. Bei freudenberg mal anfragen, was da genau los ist 
+----------------------------------------------------------------------
+55. SZA 2.0 new Network concept
+check host co moi k. neu moi thi du o lan van phai FW Freistellung
+VD: 141.36.170.8, destrap0077.emea.porsche.biz zu 
+habe ich 141.36.135.159 entfernt. bei destrap0077.emea.porsche.biz kann ich nicht 141.36.170.0/24 einlegen, 
+sodass muss ich /024 nach 255.255.255.0 umformen
+Orchestrar: ID27124
+
+--------------------------------------------------
+56. TLS nicht accept ein domainvalidiertes Zertifikat (DV)
+
+Hallo Herr Bogner,
+
+Mit TLS sind die E-Mails für uns nur bis zum ersten Mailserver verschlüsselt. 
+Der kann diese auf jeden Fall entschlüsseln und diese im Klartext lesen. 
+Deswegen ist die ASP Erklärung notwendig.
+
+Das Zertifikat, was auf dem Server der Firma integration.net installiert ist, 
+ist aber nur ein domainvalidiertes Zertifikat (DV), was wir für die vertrauliche E-Mail Kommunikation 
+als nicht ausreichend ansehen. Dieses stellt den Eigentümer der der Domain nicht ausreichend dar.
+
+Für die vertrauliche E-Mail Kommunikation mit Mandatory STARTTLS muss auf dem Mailserver, auf dem wir 
+einliefern, mindestens ein organisationsvalidiertes oder erweitert validiertes Zertifikat zum Einsatz kommen. 
+Gerne stellen wir Ihnen eine Liste mit den von der Porsche AG akzeptierten Zertifikatsprodukten zur Verfügung.
+
+Falls dieses bei der Firma integration.net nicht möglich ist, können wir auch gerne auf einem Mailserver 
+der ctk-cad.de direkt einliefern, dieses muss dann aber freigeschaltet werden, und dort muss ein OV/EV 
+Zertifikat installiert sein, welches auf Ihr Unternehmen ausgestellt ist.
+
+
+---------------------------------------------------
+57. .+@local.domain 
+ja weil er von beliebigen absender schicken möchte  
+wenn das nicht geht muss er die namentlich freischalten lassen und nicht per wildcard
+
+Wenn wir .*@porsche.ch freischalten lassen, kann jeder beliebige Absender (persönlich und unpersönlich) 
+benutzt werden und bekommt auch u.U. dadurch externe Sendeberechtigungen.
+
+local-Adressen sind nur persönlich, Anwendungen hätten ja iapps@porsche..de
+und local-Adressen haben keine externen Sendeberechtigungen.
+
+---------------------------------------------------
+58. TLS Anfrage
+Auf unserer Seite haben wir noch keine TLS-Verschlüsselung mit Ihrem Unternehmen. 
+Deshalb bitten wir Sie, das Securemail-Formular aus der letzten E-Mail auszufüllen und an uns zurückzusenden, 
+damit wir die TLS-Verschlüsselung für den Mail-Austausch aktivieren können. in Richtung von 
+Porsche zu Ihrem Unternehmen.
+
+---------------------------------------------------
+59. .yml file ma k muon phai tao Zone file moi 
+
+[12:27] Marcel Abts
+    also die domains die ansonsten keine anderen records haben außer SPF, @ und www die trägst du einfach
+    in pag-minimalistic.yml ein und entfernst die aus der zones:-Liste an der anderen stelle...
+​[12:28] Marcel Abts
+    dann benutzen die die pag/generic.minimalistic ... das ist ja die zone ohne A/CNAME für @ und www
+---------------------------------------------------
+60. tafile
+wenn wer outlook.com mit einem Zertifikat von DigiCert Inc, CN=DigiCert Cloud Services CA-1 benutzt 
+muss da in der tls config "tafile=/mail/postfix/etc/postfix/cacerts/trustanchors.special/o365.pem" stehen    
+
+
+--------------------------------------------------
+61. 54,53,52
+https://destrma0052.porsche.org:8443/smgw-admin/login.jsp testsystem
+https://destrma0054.porsche.org:8443/ 54 ist der Cluster-Master. 
+Alles was Du auf der 54 einträgst, wird von der 53 übernommen.
+https://destrma0053.porsche.org:8443/
+
+--------------------------------------------------
+62. z1_ssh
+Z1-P (VM) Root Password
+
+-------------------------------------------------
+63. EV_OV_DV
+Hallo Herr Röher,
+
+auf Ihrem Mailserver findet sich folgendes Zertifikat:
+
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number:
+            f2:49:17:1b:ba:4a:03:bb:48:ac:e5:e9:88:48:fe:42
+    Signature Algorithm: sha256WithRSAEncryption
+        Issuer: C=GB, ST=Greater Manchester, L=Salford, O=Sectigo Limited, 
+        CN=Sectigo RSA Domain Validation Secure Server CA
+        Validity
+            Not Before: Oct 10 00:00:00 2019 GMT
+            Not After : Jan  7 23:59:59 2022 GMT
+        Subject: OU=Domain Control Validated, CN=*.porsche-werkzeugbau.com
+
+Es ist zwar richtig, dass Sectigo Zertifikate die Sicherheitsanforderungen erfüllen, allerdings nur dann,
+ wenn es sich auch um ein Zertifikat mit Organisationsvalidierung handelt.
+
+Der Hintergrund ist hier folgender:
+Ein Zertifikat mit Domainvalidierung (DV) stellt nur Verschlüsselung sicher, aber keine Identität. 
+Ein Angreifer könnte daher E-Mails abfangen, sofern er selbst ebenfalls ein gültiges DV-Zertifkat beschaffen 
+kann. Da DV-Zertifikate u.a. über E-Mail validiert werden können, dürfte das für einen potentiellen Angreifer 
+(z.B. man in the middle) unproblematisch sein. Bei einem Zertifikat mit Organisationsvalidierung wird zudem 
+noch die Identität sichergestellt. D.h. wir können nur mit einem OV-Zertifikat sicherstellen, dass wir als 
+vertraulich klassifizierte E-Mails auch wirklich Ihrem Unternehmen und keinem "man in the middle" zustellen.
+
+Ggf. haben SIe ja die Möglichkeit, Ihr Sectigo DV Zertifkat durch ein Sectigo OV Zertifikat zu ersetzen?

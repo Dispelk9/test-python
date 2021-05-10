@@ -1,0 +1,4 @@
+get what after lan.d :%s/^.*lan.d\/
+get what before yml  :%s/\(yml\).*/\1/
+
+/.*lan.d\/(.*).yml$/\1/

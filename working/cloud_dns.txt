@@ -1,0 +1,79 @@
+Knipp
+Netcon
+Netnod
+easyDNS
+DNS Made Easy
+
+    - Knipp (Knipp Medien und Kommunikation GmbH) 
+        DNSSEC: yes
+        Standorte: Anycast
+        TTLs adjustable
+        DDoS-Protection: yes, using Anycast
+        Features: 
+        - IronDNS
+        - TMCH
+        - Mambo+ (Domains)
+        - Tango (Registry Services)
+        2FA: yes
+        SLA:        
+        Auditlog: yes
+    - Netcon (NetCon Unternehmensberatung GmbH)  
+        DNSSEC: yes
+        Standorte: Anycast
+        TTLs adjustable
+        DDoS-Protection: 
+        Features: 
+        2FA: yes    
+        SLA:        
+        Auditlog: yes 
+    - Netnod (Sweden)    
+        DNSSEC: yes
+        Standorte: Anycast
+        TTLs adjustable
+        DDoS-Protection: #no real features beside using secondary DNS Provider
+        Features:
+            - offer both Web and API migration. Migration supported.
+            - secondary AUTH DNS service
+        2FA: ACL prefix and TSIG, VPN
+        SLA:        
+        Auditlog: From API or Web. (DSC-API)
+    - easyDNS (International)     
+        DNSSEC: DNSSEC v2
+        Standorte: 
+        TTLs adjustable
+        DDoS-Protection: #no real features
+        Features: 
+            - Failover DNS
+            - Nameserver failover(good when 100% availability is needed no matter what)
+        2FA: yes
+        SLA:
+            - 1. Guarateed Satisfaction or Money back
+            - 2. Enterprise DNS 100% Uptimme
+        Auditlog: #no
+    - DNS Made Easy (International)    
+        DNSSEC: Only secondary DNS Service
+        Standorte: Anycast
+        TTLs adjustable
+        DDoS-Protection: 
+        Features: 
+            - Real Time Statistics.
+            - Proprietary and open source DDoS mitigation devices.
+        2FA: yes 
+        SLA: Small 500%, Corporate 1000% Service Credits when not 100% avaiable.
+        "100% avaiable:  means that 100% of DNS Made Easy’s DNS name servers assigned to your
+        “hosted zone” did not fail to respond to your DNS queries during a billing cycle."
+        Auditlog: DME Control panel
+        GeoDNS: Global Traffic Director
+
+# Registrar Registry
+
+This arrangement works much like a car dealership. A customer who is interested in buying a car visits the showroom and 
+is shown the available cars by a knowledgeable sales associate. If the customer chooses to buy a car (not one already in stock, 
+for this example), the dealership must then order the car from a manufacturer. The customer ultimately picks up the car and receives 
+customer service from the dealership.
+
+A registrar is like a dealership for domain names, and the registry is like the manufacturer. The registrar facilitates the 
+transactions and provides support services, while the registry is in charge of producing and delivering the goods. It should be noted 
+that a key difference between registering a domain and buying a car is that cars can be owned by consumers, domain names can technically 
+only be leased.
+
